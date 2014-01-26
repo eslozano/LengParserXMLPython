@@ -1,3 +1,4 @@
+import re
 class Capability:
 	def __init__(self, name=None, value=None):
 		self.name = name
@@ -69,15 +70,29 @@ def leerGroupDeString(str):
 			grp.id=m2[1]		
 		return grp
 		
-def crearDevices(file):
+def listarDevices(file):
 	devlist=[]
 	lst=list(file)
 	i=iter(lst)
 	a=next(i)
-	while not re.search("<device\s", a) :
+	while not re.search("<devices>", a) :
 		a=next(i)
-		print("as ")
-	while not re.search("</device>", a) :
+	while not re.search("</devices>", a) :
+		m=re.search("<device\s", a)
+		if m:
+			dev=leerDevDeString(a)
+			if not re.search("/>", a) :
+				while not re.search("</device>", a) :
+					gm=re.search("<group\s",a)
+					if gm:
+						tempgroup=leerGroupDeString(a)
+						while not re.search("</group>",a) :
+							cap=leerCapDeString(a)
+							if cap:
+								tempgroup.capabilities.append(cap)
+							a=next(i)
+						dev.groups.append(tempgroup)
+					a=next(i)
+			devlist.append(dev)
 		a=next(i)
-		print("asd ")
-	
+	return devlist
