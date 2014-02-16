@@ -28,12 +28,11 @@ class Group:
 			self.capabilities = capabilities
 
 class Device:
-	def __init__(self, id=None, user_agent=None, actual_device_root=None, fall_back=None, groups=None, fbDevice=None):
+	def __init__(self, id=None, user_agent=None, actual_device_root=None, fall_back=None, groups=None):
 		self.id=id
 		self.user_agent=user_agent
 		self.actual_device_root=actual_device_root
 		self.fall_back=fall_back
-		self.fbDevice=fbDevice
 		if groups is None:
 			self.groups = []
 		else:
@@ -96,28 +95,35 @@ def listarDevices(file):
 					a=next(i)
 			devlist.append(dev)
 		a=next(i)
-	
-	templist=sorted(devlist, key=lambda device: device.id)
-	for de in devlist:
-		de.fbDevice=busqueda(templist, de.fall_back)
 	return devlist
 
-def busqueda (devices, deviceId):
-    if (devices != None) and (devices != []):
-        return busquedaBinaria (devices, 0, len (devices) - 1, deviceId)
-
-def busquedaBinaria (devices, inicio, fin, deviceId):
-    if (inicio == fin ):
-    	if devices[inicio].id == deviceId:
-    		return devices[inicio]
-    	else:
-    		return None
-    centro = (inicio + fin) // 2 
-    if (deviceId < devices [centro].id):
-        return busquedaBinaria (devices, inicio, centro, deviceId) 
-    elif (deviceId > devices [centro].id):
-        return busquedaBinaria (devices, centro + 1, fin, deviceId) 
-    else: 
-    	return devices[centro]
 
 
+
+	
+def findCapabilityGroup(grupo,nombreCap):
+	for cap in grupo.capabilities:
+		if cap.name==nombreCap:
+			return cap.value
+
+def findCapabilityDevice(device,nombreCap):
+	valor=None
+	if device: #es lo mismo que device!=None
+		for grupo in device.groups:
+			valor = findCapabilityGroup(grupo,nombreCap)
+			if valor:
+				return valor
+		return findCapabilityDevice(device.fbDevice,nombreCap)
+
+#Ya retorna con los fallback tambien
+def findCapDevices(listaDevices,nombreCap,valor):
+	devsCap=[]
+	for device in listaDevices:
+		if(findCapabilityDevice(device,nombreCap)==valor):
+			devsCap.append(device)
+	return devsCap	
+	
+	
+	
+	
+	
