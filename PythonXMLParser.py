@@ -96,10 +96,6 @@ def listarDevices(file):
 			devlist.append(dev)
 		a=next(i)
 	return devlist
-
-
-
-
 	
 def findCapabilityGroup(grupo,nombreCap):
 	for cap in grupo.capabilities:
