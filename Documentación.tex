@@ -73,6 +73,7 @@ programas equivalentes en C, C++ o Java por varios motivos:
 \item la agrupación de instrucciones se hace por sangría en vez de llaves de apertura y cierre
 \item  no es necesario declarar variables ni argumentos.
 \end{itemize}
+Estas son suficientes razones por las cuales Python es un lenguaje adecuado para hacer un parse de XML a una estructura manejable.
 
 \section{Alcance}
 Consiste en extraer la información que contiene un archivo xml, analizar su contenido , representarlo en una estructura y realizar funciones que nos permitan consultar su contenido.
@@ -108,14 +109,20 @@ Consultas en Python\\
 
 \section{Observaciones}
 \begin{itemize}
-\item  
+\item  Toda la sintaxis de Python esta basada en el correcto acomodo de espacios e indentación, lo cual se presta a confusiones. En este caso es recomendable encontrar un buen editor de texto que nos marque correctamente los espacios, o nos ayude con colores, figuras o marcas dependiendo del lenguaje en el que trabajemos. Aunque en este caso Python. El editor de texto usado fue Sublime Text 2
+\begin{center}
+Correcta indentación en Python con Sublime Text 2\\
+\includegraphics[scale=0.80]{Imagenes/6.jpg}
+\end{center}
+\item  Para leer el archivo XML, y hacer el respectivo linkeo al fallback de cada dispositivo tuvimos la necesidad de hacer una busqueda, y lo haciamos de manera lineal. En este caso fue necesario encontrar un algoritmo de Búsqueda eficiente, para mejorar el tiempo en el que se cargaba la lista de Devices en nuestra estructura.
 \end{itemize}
 
 \section{ Conclusiones}
 \begin{itemize}
-\item  
+\item Python es un lenguaje muy cómodo y fácil de implementar. El hecho de que no se necesiten llaves, ni corchetes para las funciones, que no se definan los tipos de datos de las variables, y que se puedan crear de forma muy sencilla; hace a Python un lenguaje muy versátil y elegible como favorito a la hora de programar.
+\item Python permite separar nuestro programa en módulos que pueden reusarse en otros programas en Python.
+\item En cualquier búsqueda que realizemos es muy importante analizar el algoritmos que usemos, no es necesario que nosotros creemos uno. Lo importante es saber que existen ya implementados y que están disponibles para nuestro uso. Siempre en busca de una programación eficiente.
 \end {itemize}
-
 
 
 
