@@ -4,10 +4,10 @@ class Capability:
 		self.name = name
 		self.value = value
 	def __str__(self):
-		return self.id
+		return self.name+":"+self.value
 
 	def __repr__(self):
-		return self.id
+		return self.name+":"+self.value
 
 class Group:
 	def __init__(self, id=None, capabilities=None):
