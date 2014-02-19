@@ -37,7 +37,13 @@ class Device:
 			self.groups = []
 		else:
 			self.groups = groups
-			
+
+	def __str__(self):
+		return self.id
+
+	def __repr__(self):
+		return self.id
+
 def leerDevDeString(str):
 	c=re.search("<device\s", str)
 	if c:
