@@ -78,10 +78,33 @@ programas equivalentes en C, C++ o Java por varios motivos:
 Consiste en extraer la información que contiene un archivo xml, analizar su contenido , representarlo en una estructura y realizar funciones que nos permitan consultar su contenido.
 
 \section{Descripción}
-
+Se podría pensar en un documento XML como una estructura recursiva. Por tanto lo que buscamos es poder comprender en un solo vistazo las funcionalidades y/o módulos enteros. Con python pretendemos definir recursividad que implemente las estructuras anidadas del documento XML. Ya que en general, en cualquier XML se encuentran estructuras defininidas y etiquetadas. Es decir las definidas con los simbolos de mayor o menor: $<$f$>$abc$<$/f$>$. Que pueden ser en parejas  ( $<$f$>$ ,$<$/f$>$) o únicas (apertura y cierre) ($<$f ... /$>$). Y que recursivamente pueden contener más parejas de etiquetas o texto plano.
+Nuestra decisión de programación fue leer el documento XML y su conjunto de datos, para representarlo como una Lista en Python. Pero no una Lista de Enteros o de Cadenas de Texto sino una Lista de un Tipo de Dato. \\ Haskell permite que definamos un Dato con sus características y a su vez el Tipo de Dato de las mismas. Por lo que definimos tres de estas en nuestro proyecto: Device, Group y Capability. Y al final lo que tuvimos como resultado fue una Lista que almacena Device.
+\begin{itemize}
+\item Lo que tenemos es una Lista de Devices que tiene como elementos  idD , useragent, actualdevice , fallback  y una lista de groups. Por medio del fallback del Device se hace uso de la orientación a objetos de Python y se tiene un puntero al Device que es fallback.
+\item La lista de Group tiene  elementos  de tipo Group con las siguientes características : idG y  una lista de capabilities .
+\item La lista de Capabilities tiene elementos de tipo Capability con estas características : name  y value .
+\end {itemize}
+\begin{center}
+\includegraphics[scale=0.55]{Imagenes/1.jpg}
+\\ Los tipos de datos construidos en Python
+\end{center}
 
 \section{¿Qué se implementó y qué no se implementó? }
 \subsection{Lo implementado} 
+Una vez extraída la información del archivo xml, la representamos en una lista de Devices que contiene elementos de tipo Device que se puede enlazar a su device fallback, contiene una lista de Groups que tienen elementos de tipo Group y cada Group contiene una lista  de  Capabilities que tienen elementos de tipo Capability.
+\begin{center}
+La lista creada en Python de Devices
+\includegraphics[scale=0.80]{Imagenes/3.jpg}
+\\Un ejemplo de lo que hay en la lista obtenida, y sus respectivos valores
+\includegraphics[scale=0.80]{Imagenes/4.jpg}
+\end{center}
+Con la lista de Devices ya obtenida podemos consultar la información de cada Device , Group o Capability. 
+\begin{center}
+Consultas en Python\\
+\includegraphics[scale=0.80]{Imagenes/5.jpg}
+\end{center}
+\subsection{Lo no implementado} 
 
 \section{Observaciones}
 \begin{itemize}
