@@ -95,7 +95,29 @@ def listarDevices(file):
 					a=next(i)
 			devlist.append(dev)
 		a=next(i)
+
+	templist=sorted(devlist, key=lambda device: device.id)
+	for de in devlist:
+		de.fbDevice=busqueda(templist, de.fall_back)
 	return devlist
+
+def busqueda (devices, deviceId):
+    if (devices != None) and (devices != []):
+        return busquedaBinaria (devices, 0, len (devices) - 1, deviceId)
+
+def busquedaBinaria (devices, inicio, fin, deviceId):
+    if (inicio == fin ):
+    	if devices[inicio].id == deviceId:
+    		return devices[inicio]
+    	else:
+    		return None
+    centro = (inicio + fin) // 2 
+    if (deviceId < devices [centro].id):
+        return busquedaBinaria (devices, inicio, centro, deviceId) 
+    elif (deviceId > devices [centro].id):
+        return busquedaBinaria (devices, centro + 1, fin, deviceId) 
+    else: 
+    	return devices[centro]
 	
 def findCapabilityGroup(grupo,nombreCap):
 	for cap in grupo.capabilities:
